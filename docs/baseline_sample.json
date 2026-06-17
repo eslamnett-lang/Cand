@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-01-28T16:06:49.912Z",
+  "file": {
+    "sizeBytes": 83312,
+    "sha256Short": "0d7d780db9568788",
+    "nameLen": 11,
+    "nameHash": "c7ad6cd5e9d0fcf9"
+  },
+  "workbook": {
+    "sheetCount": 1,
+    "sheetNameHashes": [
+      "f64238300960ac83"
+    ],
+    "firstSheetHash": "f64238300960ac83"
+  },
+  "table": {
+    "headers": {
+      "count": 44,
+      "nameHashes": [
+        "ed56fea2b2d977b4",
+        "ce3e00b37320da47",
+        "4e75238a3ef79739",
+        "29f78a21a6c81a5a",
+        "271189ae389a39d7",
+        "48bccddd89a99414",
+        "84f165eee9709a06",
+        "61f88318ca82e6c2",
+        "4690aab750de2dda",
+        "49c1a67908ebce57",
+        "b711726b00b5f5a1",
+        "ac8ef414dbff994d",
+        "52c08baac900695b",
+        "8d59829c1e15afe1",
+        "71a0aef46a608b65",
+        "f443294579e882b9",
+        "6ddb61f11a21b8d4",
+        "dc30a706c409ab7b",
+        "41238b965aa976e6",
+        "3ac1a9ec4fa7a9fa",
+        "fd947a841a798fb7",
+        "e7f18ebd960d1749",
+        "22f805aba3033b75",
+        "d397de350f754dab",
+        "df7f8c57ca7d8cba",
+        "c3f714df26c693ba",
+        "9ae26248d741ae5b",
+        "96729566f32c53a0",
+        "64a4118234a36e66",
+        "e4ecbccc5b1ab9eb",
+        "7ef34a9ae2fb5187",
+        "48162add43e5aed2",
+        "14947f611c6b8482",
+        "99a6c440cdd9dbdd",
+        "327d32489f4e69b6",
+        "9ef7181279ff6a68",
+        "c913c10b56f6e73d",
+        "7ce11d38f3690291",
+        "ce4683e7013a18cd",
+        "0af0b983e1528d90",
+        "8a87b9d67ee4db77",
+        "f73ba4bcc1132188",
+        "0fe732f0d3019a51",
+        "97289bf2eb2e51b5"
+      ]
+    },
+    "rows": {
+      "dataRowCount": 368
+    },
+    "guessedColumns": {
+      "startHeaderHash": "271189ae389a39d7",
+      "endHeaderHash": "48bccddd89a99414",
+      "deductHeaderHash": "52c08baac900695b"
+    }
+  },
+  "filters": {
+    "counts": {
+      "ALL": {
+        "count": 368
+      },
+      "BALANCE": {
+        "count": 33
+      },
+      "UNITS": {
+        "count": 284
+      },
+      "BONUS": {
+        "count": 32
+      },
+      "JUNK": {
+        "count": 2
+      },
+      "EMPTY": {
+        "count": 17
+      },
+      "OTHER": {
+        "count": 0
+      }
+    },
+    "deductFrom": {
+      "emptyCount": 0,
+      "distinctApprox": 5,
+      "topHashed": [
+        {
+          "len": 9,
+          "hash": "0862ab7608c79d40",
+          "count": 284
+        },
+        {
+          "len": 7,
+          "hash": "d05e07b7c14e596a",
+          "count": 33
+        },
+        {
+          "len": 5,
+          "hash": "d587622d277c4be4",
+          "count": 32
+        },
+        {
+          "len": 1,
+          "hash": "36a9e7f1c95b82ff",
+          "count": 17
+        },
+        {
+          "len": 17,
+          "hash": "d10cca7af16bd967",
+          "count": 2
+        }
+      ]
+    }
+  }
+}

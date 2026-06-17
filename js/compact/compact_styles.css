@@ -1,0 +1,40 @@
+/* Styles for the compact tables and filter bar */
+.compact-filter {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Ensure the compact table is scrollable and headers stick to the top */
+#compactTableWrap {
+  max-height: 60vh;
+  overflow: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
+
+.compact-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.compact-table th,
+.compact-table td {
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
+}
+
+.compact-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f8f9fa;
+  z-index: 2;
+}
+
+.compact-table tbody tr:hover {
+  background-color: #f1f3f5;
+}

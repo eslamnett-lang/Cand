@@ -1,0 +1,105 @@
+
+:root { --table-height: 70vh; }
+body { font-family: "Cairo", system-ui, sans-serif; background:#fafafa;}
+.app { max-width: 1400px; margin: 8px auto 24px; }
+.card { box-shadow: 0 6px 18px rgba(0,0,0,.06); border-radius: 16px; }
+/*
+  The table wrapper is the primary scroll container for large datasets.
+  This restores the internal vertical scroll inside the table area.
+*/
+.table-wrap { overflow-x:auto; overflow-y:auto; max-height: var(--table-height); border:1px solid #eaeaea; border-radius: 12px; background:#fff; }
+/*
+  Sticky table header inside the scrollable .table-wrap.
+  If the top tools bar exists, JS sets --tools-h on the wrap so the header
+  doesn't overlap it.
+*/
+thead th { position: sticky; top: var(--tools-h, 0px); background: #f8f9fa; z-index: 1; }
+.loading-overlay { position: fixed; inset: 0; background: rgba(255,255,255,.8); display:none; align-items:center; justify-content:center; z-index:9999; }
+.spinner { width:56px; height:56px; border-radius:50%; border:6px solid #dee2e6; border-top-color:#0d6efd; animation:spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg);} }
+.sticky-controls { position: sticky; top: 0; z-index: 5; background: #fff; padding-top: 12px; }
+.table > :not(caption) > * > * { padding: .55rem .75rem; }
+.fee-red { color: #dc3545; font-weight:600; }            /* Total Fee */
+.unit-yellow { background: #fff3cd; }                    /* Free Unit Consumed */
+.select-col { width: 36px; text-align:center; }
+.sum-bar { background:#fff; border:1px dashed #ddd; border-radius:10px; padding:.6rem .8rem; }
+.sum-block{display:flex;flex-direction:column;gap:.25rem;min-width:240px;}
+mark { background:#ffe066; padding:0; }
+
+/* Consumption breakdown box */
+.consumption-box{border:1px solid #e5e7eb;background:#ffffff;border-radius:12px;padding:12px 14px;}
+.consumption-box h6{margin:0 0 8px;font-weight:700}
+.break-row{border-top:1px dashed #e9ecef;padding-top:8px;margin-top:8px}
+.kv{display:flex;gap:8px;flex-wrap:wrap}
+.kv .tag{font-size:.825rem;background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:4px 8px}
+.small-muted{font-size:.85rem;color:#6c757d}
+
+/* Collapsible details button helper */
+.d-none{display:none!important}
+
+/* Bonus diagnostics strip */
+.bonus-diag{margin-top:8px;padding:8px 10px;border:1px dashed #e9ecef;border-radius:8px;background:#fcfcfd;color:#555}
+.bonus-diag .small{font-size:.85rem}
+
+/* Hide selected summary bar per user request */
+#sumSelectedBar{display:none!important}
+
+/* highlight target row when jumped from breakdown */
+.row-flash{ animation: rowFlash 1.2s ease; background: rgba(255,235,59,.35) !important; }
+@keyframes rowFlash { 0%{background: rgba(255,235,59,.6);} 100%{background: transparent;} }
+.br-line{ cursor:pointer; display:block; }
+
+/* تظليل أحمر وتعتيـم للصف الهدف */
+.row-target{ outline: 2px solid #e53935 !important; box-shadow: inset 0 0 0 9999px rgba(229,57,53,.08); }
+.row-flash{ animation: rowFlash 1.2s ease; }
+
+/* الحالة: انتظر... على سطر التفاصيل */
+.br-line{ cursor:pointer; display:block; position:relative; }
+.br-line.loading{ opacity:.6; }
+.br-line .br-wait{ font-size:.8rem; opacity:.9; }
+
+@keyframes rowFlash { 0%{background: rgba(255,235,59,.45);} 100%{background: transparent;} }
+
+/* marker to jump to original row */
+.br-line{ display:block; position:relative; padding-inline-start: 0.25rem; }
+.br-jump{ display:inline-block; margin-inline-end: .5rem; padding: 0 .4rem; border:1px solid rgba(0,0,0,.15); border-radius:999px; font-size:.85em; cursor:pointer; user-select:none; }
+.br-jump.loading{ opacity:.6; pointer-events:none; }
+
+/* clicked breakdown line */
+.br-line.br-active{ background: rgba(33,150,243,.08); outline: 1px dashed rgba(33,150,243,.5); }
+
+/* compare row under original */
+.row-compare td{ background: #fffaf0; border-top: 1px dashed rgba(0,0,0,.2); }
+.cmp-wrap{ display:flex; gap:.5rem; align-items:center; padding:.35rem .25rem; }
+.cmp-tag{ background:#ffecb3; color:#8d6e63; border-radius:6px; padding:.1rem .4rem; font-size:.8em; }
+.cmp-text{ opacity:.9; }
+
+/* stacked comparison list under original row */
+.row-compare td{ background: #fffaf0; border-top: 1px dashed rgba(0,0,0,.2); }
+.cmp-wrap{ display:block; padding:.35rem .25rem; }
+.cmp-list{ display:flex; flex-direction:column; gap:.3rem; }
+.cmp-item{ display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; padding:.2rem .3rem; background:#fff; border:1px dashed rgba(0,0,0,.15); border-radius:6px; }
+.cmp-tag{ background:#ffecb3; color:#8d6e63; border-radius:6px; padding:.05rem .4rem; font-size:.8em; }
+.cmp-time{ opacity:.7; font-size:.8em; }
+.cmp-text{ opacity:.95; }
+
+
+/* زر نسخ الصف داخل نتيجة التفاصيل */
+.copy-row-btn{border:0;padding:.3rem .7rem;border-radius:999px;background:#ffe8a1;font-weight:700;cursor:pointer}
+.copy-row-btn:active{transform:scale(.98)}
+
+
+/* Feedback on successful copy (faded look) */
+.copy-row-btn{ transition: opacity .18s ease, filter .18s ease; }
+.copy-row-btn.copied{ opacity:.45; filter:saturate(0.2); }
+
+
+/* زر التفاصيل السريع بجوار عمود الاختيار */
+.row-quick-details{ margin-inline-start:.35rem; padding:.2rem .5rem; border:0; border-radius:8px; background:#e7f1ff; cursor:pointer; font-weight:600;  color:#ff69b4;}
+.row-quick-details:active{ transform:scale(.98); }
+
+
+/* زر التفاصيل: حالة باهت عند التشغيل، ومن غير رد فعل عند الضغط */
+.row-quick-details{ margin-inline-start:.35rem; padding:.2rem .5rem; border:0; border-radius:8px; background:#e7f1ff; cursor:pointer; font-weight:600; transition:opacity .18s ease, filter .18s ease; }
+.row-quick-details.on{ opacity:.45; filter:saturate(0.25); }
+.row-quick-details:active{ transform:none; }

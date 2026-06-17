@@ -1,0 +1,39 @@
+/* === Theme system (Luxe Glass) === */
+
+/* Theme toggle button */
+.theme-toggle{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:30px; height:30px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.10);
+  color: rgba(255,255,255,.92);
+  font-size:14px; line-height:1;
+  cursor:pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.10);
+}
+html:not([data-theme="dark"]) .theme-toggle{
+  border-color: rgba(0,0,0,.10);
+  background: rgba(255,255,255,.55);
+  color: rgba(0,0,0,.80);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.70);
+}
+.theme-toggle:hover{ filter: brightness(1.03) saturate(1.04); }
+
+/* Dark theme page background (kept here as a safe baseline) */
+html[data-theme="dark"] body{
+  background:
+    radial-gradient(1200px circle at 10% 0%, rgba(20,130,140,.35), transparent 55%),
+    radial-gradient(900px circle at 90% 10%, rgba(120,70,200,.22), transparent 55%),
+    linear-gradient(180deg, #050814 0%, #050a12 35%, #04060c 100%) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+
+/* Links in dark */
+html[data-theme="dark"] a{ color: var(--lux-gold-2, #f1d18a); text-decoration: none; }
+html[data-theme="dark"] a:hover{ text-decoration: underline; }
+
+/* Loading overlay in dark */
+html[data-theme="dark"] .loading-overlay{ background: rgba(0,0,0,.55) !important; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+html[data-theme="dark"] .spinner{ border-color: rgba(255,255,255,.20) !important; border-top-color: rgba(110,231,255,.90) !important; }
