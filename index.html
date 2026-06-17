@@ -298,51 +298,17 @@ transition:transform .15s ease,box-shadow .15s ease;box-shadow:0 3px 8px rgba(0,
 document.addEventListener("DOMContentLoaded", () => {
 
   // --- LOGIN LOGIC ---
-  const FIXED_PASSWORD = 'Chat2025';
-const overlay = document.getElementById('loginOverlay');
-const btn = document.getElementById('loginBtn');
-const pwd = document.getElementById('loginPwd');
-const msg = document.getElementById('loginMsg');
+
+  const overlay = document.getElementById('loginOverlay');
 const app = document.getElementById('protectedApp');
 
-// رابط دخول خاص
+// إخفاء شاشة تسجيل الدخول نهائياً
+overlay.style.display = 'none';
 
-const params = new URLSearchParams(window.location.search);
-const autoLogin = params.get('access');
+// إظهار التطبيق مباشرة
+app.style.display = 'block';
+app.style.opacity = '1';
 
-pwd.focus();
-
-function unlock() {
-  if (pwd.value === FIXED_PASSWORD) {
-    overlay.style.opacity = '0';
-    setTimeout(() => overlay.style.display = 'none', 400);
-    app.style.display = 'block';
-    setTimeout(() => app.style.opacity = '1', 50);
-    sessionStorage.setItem('candat_unlocked', '1');
-  } else {
-    msg.textContent = 'كلمة المرور خاطئة';
-    pwd.value = '';
-    pwd.focus();
-  }
-}
-
-btn.addEventListener('click', unlock);
-
-pwd.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') unlock();
-});
-
-if (sessionStorage.getItem('candat_unlocked') === '1') {
-  overlay.style.display = 'none';
-  app.style.display = 'block';
-  app.style.opacity = '1';
-}
-
-// دخول تلقائى بالرابط
-if (autoLogin === 'vip') {
-  pwd.value = FIXED_PASSWORD;
-  unlock();
-}
   // --- APP LOGIC ---
   const splash = document.getElementById("splash");
   const sheetList = document.getElementById("sheetList");
