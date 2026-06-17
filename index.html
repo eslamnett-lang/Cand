@@ -299,34 +299,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- LOGIN LOGIC ---
   const FIXED_PASSWORD = 'Chat2025';
-  const overlay = document.getElementById('loginOverlay');
-  const btn = document.getElementById('loginBtn');
-  const pwd = document.getElementById('loginPwd');
-  const msg = document.getElementById('loginMsg');
-  const app = document.getElementById('protectedApp');
+const overlay = document.getElementById('loginOverlay');
+const btn = document.getElementById('loginBtn');
+const pwd = document.getElementById('loginPwd');
+const msg = document.getElementById('loginMsg');
+const app = document.getElementById('protectedApp');
 
-  pwd.focus();
-  function unlock() {
-    if (pwd.value === FIXED_PASSWORD) {
-      overlay.style.opacity = '0';
-      setTimeout(() => overlay.style.display = 'none', 400);
-      app.style.display = 'block';
-      setTimeout(() => app.style.opacity = '1', 50);
-      sessionStorage.setItem('candat_unlocked', '1');
-    } else {
-      msg.textContent = 'كلمة المرور خاطئة';
-      pwd.value = '';
-      pwd.focus();
-    }
-  }
-  btn.addEventListener('click', unlock);
-  pwd.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
-  if (sessionStorage.getItem('candat_unlocked') === '1') {
-    overlay.style.display = 'none';
+// رابط دخول خاص
+
+const params = new URLSearchParams(window.location.search);
+const autoLogin = params.get('access');
+
+pwd.focus();
+
+function unlock() {
+  if (pwd.value === FIXED_PASSWORD) {
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.style.display = 'none', 400);
     app.style.display = 'block';
-    app.style.opacity = '1';
+    setTimeout(() => app.style.opacity = '1', 50);
+    sessionStorage.setItem('candat_unlocked', '1');
+  } else {
+    msg.textContent = 'كلمة المرور خاطئة';
+    pwd.value = '';
+    pwd.focus();
   }
+}
 
+btn.addEventListener('click', unlock);
+
+pwd.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') unlock();
+});
+
+if (sessionStorage.getItem('candat_unlocked') === '1') {
+  overlay.style.display = 'none';
+  app.style.display = 'block';
+  app.style.opacity = '1';
+}
+
+// دخول تلقائى بالرابط
+if (autoLogin === 'vip') {
+  pwd.value = FIXED_PASSWORD;
+  unlock();
+}
   // --- APP LOGIC ---
   const splash = document.getElementById("splash");
   const sheetList = document.getElementById("sheetList");
@@ -348,19 +364,19 @@ document.addEventListener("DOMContentLoaded", () => {
     themeToggle.textContent = next === "dark" ? "🌙" : "☀️";
   });
 
-  fetch('candat_data.xlsx')
-    .then(resp => {
-      if (!resp.ok) throw new Error("File not found");
-      return resp.arrayBuffer();
-    })
-    .then(buffer => {
-      const wb = XLSX.read(buffer, { type: "array" });
-      handleWorkbook(wb);
-    })
-    .catch((error) => {
-        cardsGrid.innerHTML = '<div class="empty">⚠️ خطأ: لم يتم العثور على ملف البيانات (candat_data.xlsx).</div>';
-        console.error("Error loading data file:", error);
-    });
+  fetch('https://raw.githubusercontent.com/digital-chat/Cand/main/candat_data.xlsx')
+  .then(resp => {
+    if (!resp.ok) throw new Error("File not found");
+    return resp.arrayBuffer();
+  })
+  .then(buffer => {
+    const wb = XLSX.read(buffer, { type: "array" });
+    handleWorkbook(wb);
+  })
+  .catch((error) => {
+    cardsGrid.innerHTML = '<div class="empty">⚠️ خطأ: لم يتم العثور على ملف البيانات.</div>';
+    console.error("Error loading data file:", error);
+  });
 
   function handleWorkbook(wb) {
     workbookData = {};
